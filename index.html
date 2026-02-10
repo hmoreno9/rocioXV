@@ -596,6 +596,22 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   startAuto();
+
+  function copiarAlias() {
+  const alias = document.getElementById("alias").innerText;
+  const boton = document.querySelector(".alias-box button");
+
+  navigator.clipboard.writeText(alias)
+    .then(() => {
+      boton.innerText = "Copiado ✓";
+      setTimeout(() => {
+        boton.innerText = "Copiar Alias";
+      }, 2000);
+    })
+    .catch(err => {
+      console.error("Error al copiar: ", err);
+    });
+   }
 });
 </script>
 
