@@ -324,107 +324,6 @@ color:black;
 </style>
 </head>
 
-<script>
-function copiarAlias() {
-    const alias = document.getElementById("alias").innerText;
-    navigator.clipboard.writeText(alias);
-    alert("Alias copiado: " + alias);
-}
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-
-  const carousel = document.querySelector(".carousel");
-  const slides = document.querySelector(".slides");
-  const images = document.querySelectorAll(".slides img");
-  const dotsContainer = document.querySelector(".dots");
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");
-
-  if (!carousel || !slides || images.length === 0 || !dotsContainer) {
-    console.log("Carrusel no encontrado correctamente");
-    return;
-  }
-
-  let index = 0;
-  let interval = null;
-  let startX = 0;
-
-  // Crear puntitos
-  images.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.className = "dot";
-    if (i === 0) dot.classList.add("active");
-
-    dot.addEventListener("click", function() {
-      showSlide(i);
-      restartAuto();
-    });
-
-    dotsContainer.appendChild(dot);
-  });
-
-  function updateDots() {
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach(d => d.classList.remove("active"));
-    dots[index].classList.add("active");
-  }
-
-  function showSlide(i) {
-    if (i >= images.length) index = 0;
-    else if (i < 0) index = images.length - 1;
-    else index = i;
-
-    slides.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-
-  function startAuto() {
-    interval = setInterval(function() {
-      showSlide(index + 1);
-    }, 4000);
-  }
-
-  function stopAuto() {
-    clearInterval(interval);
-  }
-
-  function restartAuto() {
-    stopAuto();
-    startAuto();
-  }
-
-  // Botones
-  nextBtn.addEventListener("click", function() {
-    showSlide(index + 1);
-    restartAuto();
-  });
-
-  prevBtn.addEventListener("click", function() {
-    showSlide(index - 1);
-    restartAuto();
-  });
-
-  // Mouse pause
-  carousel.addEventListener("mouseenter", stopAuto);
-  carousel.addEventListener("mouseleave", startAuto);
-
-  // Swipe móvil
-  slides.addEventListener("touchstart", function(e) {
-    startX = e.touches[0].clientX;
-  });
-
-  slides.addEventListener("touchend", function(e) {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) showSlide(index + 1);
-    if (endX - startX > 50) showSlide(index - 1);
-    restartAuto();
-  });
-
-  startAuto();
-});
-</script>
 
 <body>
 
@@ -519,6 +418,7 @@ Ver Ubicación
     <p class="mp-note">Alias de Mercado Pago</p>
 </div>
 </section>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -613,7 +513,6 @@ document.addEventListener("DOMContentLoaded", function() {
   startAuto();
 });
 </script>
-
 
 </body>
 </html>
