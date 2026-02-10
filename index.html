@@ -418,7 +418,24 @@ Ver Ubicación
 </section>
 
 <script>
+  function copiarAlias() {
+  const alias = document.getElementById("alias").innerText;
+  const boton = document.querySelector(".alias-box button");
 
+  navigator.clipboard.writeText(alias)
+    .then(() => {
+      boton.innerText = "Copiado ✓";
+      setTimeout(() => {
+        boton.innerText = "Copiar Alias";
+      }, 2000);
+    })
+    .catch(err => {
+      console.error("Error al copiar: ", err);
+    });
+   }	
+</script>
+
+<script>
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -597,23 +614,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   startAuto();
 });	
-</script>
-<script>
-  function copiarAlias() {
-  const alias = document.getElementById("alias").innerText;
-  const boton = document.querySelector(".alias-box button");
-
-  navigator.clipboard.writeText(alias)
-    .then(() => {
-      boton.innerText = "Copiado ✓";
-      setTimeout(() => {
-        boton.innerText = "Copiar Alias";
-      }, 2000);
-    })
-    .catch(err => {
-      console.error("Error al copiar: ", err);
-    });
-   }	
 </script>
 </body>
 </html>
