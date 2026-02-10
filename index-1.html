@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save the Date - Rocio XV</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+.hero {
+    height: 100vh;
+    background: url('RocioPlaya1.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5em;
+    letter-spacing: 3px;
+    color: #d4af37;
+}
+
+.hero p {
+    margin-top: 10px;
+    font-size: 1.3em;
+    letter-spacing: 4px;
+}
+
+.countdown {
+    margin-top: 30px;
+    font-size: 1.5em;
+    color: #d4af37;
+}
+
+/* PARTICULAS */
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+/* SECCIONES */
+
+.section{
+    padding:70px 20px;
+    background:#0a0a0a;
+}
+
+.card{
+    background:#111;
+    border:1px solid #d4af37;
+    max-width:500px;
+    margin:40px auto;
+    padding:40px 30px;
+    border-radius:20px;
+    box-shadow:0 0 40px rgba(212,175,55,.2);
+}
+
+.card h2{
+    font-family:'Playfair Display',serif;
+    color:#d4af37;
+    margin-bottom:20px;
+}
+
+.card p{
+    margin:10px 0;
+}
+
+.section {
+    padding: 70px 20px;
+    background: #0a0a0a;
+}
+
+.card {
+    background: #111;
+    border: 1px solid #d4af37;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(212,175,55,0.2);
+}
+
+.card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    margin-bottom: 20px;
+}
+
+.card p {
+    margin: 10px 0;
+    font-weight: 300;
+}
+
+
+input, button {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 30px;
+    border: none;
+    font-size: 0.9em;
+}
+
+input {
+    background: #1c1c1c;
+    color: white;
+    border: 1px solid #333;
+}
+
+button {
+    background: #d4af37;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #b8962e;
+}
+
+/* BOTON WHATSAPP */
+
+.whatsapp{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    border-radius:30px;
+    background:#25D366;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* DRESS CODE */
+
+.dress{
+    font-size:1.2em;
+    color:#d4af37;
+    margin-top:15px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+
+.map-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    border: 1px solid #d4af37;
+    border-radius: 30px;
+    color: #d4af37;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.map-btn:hover {
+    background: #d4af37;
+    color: black;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>ROCIO</h1>
+        <p>MIS 15 AÑOS</p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+</section>
+
+<section class="section">
+
+    <div class="card">
+        <h2>Detalles del Evento</h2>
+        <p>📅 12 de Septiembre 2026</p>
+        <p>🕘 21:00 hs</p>
+        <p><strong>📍 Lugar:</strong> Salón JANOS Liniers, Av. Larrazábal 557, C1408 C.A.B.A</p>
+	<p class="dress">Dress Code: Elegante / Glam</p>
+        
+	<a href="https://maps.app.goo.gl/2H4jBRKEwP3k8Hgj9" target="_blank" class="map-btn">
+            Ver Ubicación
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Confirmar Asistencia</h2>
+
+        <form action="https://formspree.io/f/mbdalyql" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="alimentos" placeholder="¿Tienes alguna restricción alimentaria?">
+            <input type="text" name="canciones" placeholder="¿Alguna canción que no pueda faltar en la fiesta?">
+            <button type="submit">Confirmar</button>
+        </form>
+    </div>
+
+</section>
+
+<script>
+const eventDate = new Date("May 1, 2026 21:00:00").getTime();
+const countdown = document.getElementById("countdown");
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    countdown.innerHTML = days + " DÍAS • " + hours + " HS";
+}, 1000);
+
+// PARTICULAS DORADAS
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<100;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#d4af37";
+ctx.beginPath();
+for(let i=0;i<particles.length;i++){
+let p=particles[i];
+ctx.moveTo(p.x,p.y);
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+}
+ctx.fill();
+update();
+}
+
+function update(){
+for(let i=0;i<particles.length;i++){
+let p=particles[i];
+p.y+=p.d;
+if(p.y>canvas.height){
+particles[i]={x:Math.random()*canvas.width,y:0,r:p.r,d:p.d};
+}
+}
+}
+
+setInterval(draw,33);
+
+</script>
+
+</body>
+</html>

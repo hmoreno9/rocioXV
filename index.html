@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocío - Mis 15 Años</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+background:#000;
+color:#fff;
+font-family:'Montserrat',sans-serif;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* INTRO */
+#intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+cursor:pointer;
+transition:opacity 1.5s ease;
+}
+
+#intro h1{
+color:#d4af37;
+font-family:'Playfair Display',serif;
+font-size:2em;
+}
+
+/* PARTICULAS */
+canvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+}
+
+/* DESTELLO */
+.flash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#d4af37;
+opacity:0;
+z-index:1;
+pointer-events:none;
+transition:opacity 0.3s ease;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+background:url('Rocio1.jpg') center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+opacity:0;
+transition:opacity 2s ease;
+z-index:2;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,.6),rgba(0,0,0,.9));
+pointer-events:none;
+}
+
+.hero-content{
+position:relative;
+z-index:3;
+}
+
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:4.5em;
+color:#d4af37;
+letter-spacing:4px;
+}
+
+.hero p{
+letter-spacing:5px;
+margin-top:10px;
+}
+
+.countdown{
+margin-top:25px;
+font-size:1.5em;
+color:#d4af37;
+}
+
+/* SECCIONES */
+.section{
+padding:70px 20px;
+background:#0a0a0a;
+position:relative;
+z-index:3;
+}
+
+.card{
+background:#111;
+border:1px solid #d4af37;
+max-width:600px;
+margin:40px auto;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(212,175,55,.2);
+position:relative;
+z-index:3;
+}
+
+.card h2{
+font-family:'Playfair Display',serif;
+color:#d4af37;
+margin-bottom:20px;
+}
+
+.card p{margin:10px 0}
+
+.dress{
+color:#d4af37;
+font-weight:600;
+}
+
+.regalo {
+    text-align: center;
+}
+
+.alias-box {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.alias-box span {
+    background: #111;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.alias-box button {
+    background: #d4af37;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.alias-box button:hover {
+    background: #b8962e;
+}
+
+.mp-note {
+    font-size: 0.9em;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+
+/* GALERIA */
+.gallery{
+display:flex;
+gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.gallery img{
+width:180px;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+border:1px solid #d4af37;
+transition:transform .4s ease;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* FORM */
+input,button{
+width:100%;
+padding:14px;
+margin:12px 0;
+border-radius:30px;
+border:none;
+}
+
+input{
+background:#1c1c1c;
+color:white;
+border:1px solid #333;
+}
+
+button{
+background:#d4af37;
+color:black;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#b8962e;
+}
+
+.map-btn{
+display:inline-block;
+margin-top:15px;
+padding:10px 25px;
+border-radius:30px;
+border:1px solid #d4af37;
+color:#d4af37;
+text-decoration:none;
+transition:.3s;
+}
+
+.map-btn:hover{
+background:#d4af37;
+color:black;
+}
+
+/* BANNER */
+.banner-section {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(180deg, #ffe6f0, #fff0f5);
+}
+
+.titulo-banner {
+  color: #d63384;
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.carousel {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(214, 51, 132, 0.2);
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+  width: 100%;
+  border-radius: 25px;
+  flex-shrink: 0;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #ffc0cb;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background-color: #d63384;
+  transform: scale(1.2);
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 50%;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+</style>
+</head>
+
+<script>
+function copiarAlias() {
+    const alias = document.getElementById("alias").innerText;
+    navigator.clipboard.writeText(alias);
+    alert("Alias copiado: " + alias);
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const carousel = document.querySelector(".carousel");
+  const slides = document.querySelector(".slides");
+  const images = document.querySelectorAll(".slides img");
+  const dotsContainer = document.querySelector(".dot");
+
+  if (!carousel || !slides || images.length === 0) {
+    console.log("Carrusel no encontrado");
+    return;
+  }
+
+  let index = 0;
+  let interval = null;
+  let startX = 0;
+
+  // Crear puntitos
+  images.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    if (i === 0) dot.classList.add("active");
+
+    dot.addEventListener("click", function() {
+      showSlide(i);
+    });
+
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach(d => d.classList.remove("active"));
+    dots[index].classList.add("active");
+  }
+
+  function showSlide(i) {
+    if (i >= images.length) index = 0;
+    else if (i < 0) index = images.length - 1;
+    else index = i;
+
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  }
+
+  function startAuto() {
+    if (interval) clearInterval(interval);
+    interval = setInterval(function() {
+      showSlide(index + 1);
+    }, 4000);
+  }
+
+  function stopAuto() {
+    if (interval) clearInterval(interval);
+  }
+
+  // Mouse pause
+  carousel.addEventListener("mouseenter", stopAuto);
+  carousel.addEventListener("mouseleave", startAuto);
+
+  // Swipe
+  slides.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+  });
+
+  slides.addEventListener("touchend", function(e) {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) showSlide(index + 1);
+    if (endX - startX > 50) showSlide(index - 1);
+  });
+
+  startAuto();
+
+});
+</script>
+
+<body>
+
+<div id="intro">
+<h1>Tocar para ingresar</h1>
+<p style="margin-top:10px;letter-spacing:3px;">✨ ROCÍO - MIS 15 ✨</p>
+</div>
+
+<div class="flash" id="flash"></div>
+
+<audio id="music" loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="particles"></canvas>
+
+<section class="hero" id="hero">
+<div class="hero-content">
+<h1 id="name"></h1>
+<p>MIS 15 AÑOS</p>
+<div class="countdown" id="countdown"></div>
+</div>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h2>Detalles del Evento</h2>
+<p>📅 1 de Mayo 2026</p>
+<p>🕘 21:00 hs</p>
+<p><strong>📍 Lugar:</strong> Salón JANOS Liniers</p>
+<p>Av. Larrazábal 557, C1408 C.A.B.A</p>
+<p class="dress">Dress Code: Elegante / Glam</p>
+<p>Favor no utilizar Rosas, Plateados o Dorados</p>
+
+<a href="https://www.google.com/maps?q=Salón+Janos+Liniers+Av.+Larrazábal+557+CABA"
+target="_blank"
+rel="noopener noreferrer"
+class="map-btn">
+Ver Ubicación
+</a>
+</div>
+
+<section class="banner-section">
+  <h2>✨ Momentos de Rocío ✨</h2>
+  
+  <div class="carousel">
+    <div class="slides">
+      <img src="Rocio1.jpg" alt="Rocío 1">
+      <img src="RocioPlaya1.jpg" alt="Rocío 2">
+      <img src="RocioPina1.jpg" alt="Rocío 3">
+      <img src="RocioROS1.jpg" alt="Rocío 4">
+    </div>
+	<div class="dots"></div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+</section>
+
+<div class="card">
+<h2>Galería</h2>
+<div class="gallery">
+<img src="Rocio1.jpg">
+<img src="RocioPlaya1.jpg">
+<img src="RocioPina1.jpg">
+<img src="RocioROS1.jpg">
+</div>
+</div>
+
+<div class="card">
+<h2>Confirmar Asistencia</h2>
+
+<form action="https://formspree.io/f/mbdalyql" method="POST">
+<input type="hidden" name="_redirect" value="gracias.html">
+<input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+<input type="email" name="email" placeholder="Email" required>
+<input type="text" name="alimentos" placeholder="¿Tienes alguna restricción alimentaria?">
+<input type="text" name="canciones" placeholder="¿Alguna canción que no pueda faltar?">
+<button type="submit">Confirmar asistencia</button>
+</form>
+</div>
+
+<div class="card regalo">
+    <h2>🎁 Regalo</h2>
+    <p>Si deseas hacer un regalo, puedes hacerlo por aquí:</p>
+
+    <div class="alias-box">
+        <span id="alias">rochi.morenoo</span>
+        <button onclick="copiarAlias()">Copiar Alias</button>
+    </div>
+
+    <p class="mp-note">Alias de Mercado Pago</p>
+</div>
+</section>
+
+<script>
+// INTRO + MUSICA
+const intro=document.getElementById("intro");
+const music=document.getElementById("music");
+const hero=document.getElementById("hero");
+const flash=document.getElementById("flash");
+
+intro.addEventListener("click",()=>{
+music.volume=0.4;
+music.play();
+flash.style.opacity=1;
+setTimeout(()=>{flash.style.opacity=0},300);
+intro.style.opacity=0;
+setTimeout(()=>{intro.style.display="none";hero.style.opacity=1},1500);
+animateName();
+});
+
+// NOMBRE ANIMADO
+function animateName(){
+let text="ROCÍO";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("name").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,200);
+}
+}
+type();
+}
+
+// COUNTDOWN
+const eventDate=new Date("May 1, 2026 21:00:00").getTime();
+setInterval(()=>{
+let now=new Date().getTime();
+let distance=eventDate-now;
+let days=Math.floor(distance/(1000*60*60*24));
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+document.getElementById("countdown").innerHTML=days+" DÍAS • "+hours+" HS";
+},1000);
+
+// PARTICULAS
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<120;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,d:Math.random()*1});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#d4af37";
+ctx.beginPath();
+for(let p of particles){
+ctx.moveTo(p.x,p.y);
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+}
+ctx.fill();
+update();
+}
+
+function update(){
+for(let p of particles){
+p.y+=p.d;
+if(p.y>canvas.height){
+p.y=0;
+p.x=Math.random()*canvas.width;
+}
+}
+}
+
+setInterval(draw,33);
+</script>
+
+</body>
+</html>

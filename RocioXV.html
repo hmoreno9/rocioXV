@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save the Date - 15 de Martina</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    color: white;
+    text-align: center;
+    background: black;
+}
+
+.hero {
+    height: 100vh;
+    background: url('foto.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.3em;
+    margin-top: 10px;
+}
+
+.section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1e1e1e, #3b3b3b);
+}
+
+.card {
+    background: white;
+    color: #333;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #d4af37;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #b8962e;
+}
+
+.countdown {
+    font-size: 2em;
+    margin-top: 20px;
+}
+
+a.map-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #d4af37;
+    color: black;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Martina</h1>
+        <p>Mis 15 años</p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="card">
+        <h2>Detalles del evento</h2>
+        <p><strong>📅 Fecha:</strong> 12 de Septiembre 2026</p>
+        <p><strong>🕘 Hora:</strong> 21:00 hs</p>
+        <p><strong>📍 Lugar:</strong> Salón La Toscana</p>
+
+        <a class="map-btn" 
+           href="https://www.google.com/maps" 
+           target="_blank">
+           Ver ubicación
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>Confirmá tu asistencia</h2>
+
+        <form action="https://formspree.io/f/TU_CODIGO" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="acompanantes" placeholder="¿Cuántos acompañantes?">
+            <button type="submit">Confirmar</button>
+        </form>
+    </div>
+</section>
+
+<script>
+const eventDate = new Date("Sep 12, 2026 21:00:00").getTime();
+const countdown = document.getElementById("countdown");
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    countdown.innerHTML = `${days} días ${hours} hs`;
+}, 1000);
+</script>
+
+</body>
+</html>

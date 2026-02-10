@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save the Date - 15 de Martina</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f8cdda, #fcb69f);
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+.card {
+    background: white;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #ff6f91;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #ff3f6c;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.9em;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Save the Date</h1>
+    <h2>Rocio Moreno XV 🎉</h2>
+
+    <div class="card">
+        <p><strong>📅 Fecha:</strong> 1 de Mayo de 2026</p>
+        <p><strong>📍 Lugar:</strong> Salón JANOS Liniers, Av. Larrazábal 557, C1408 C.A.B.A</p>
+        <p><strong>🕘 Hora:</strong> 21:00 hs</p>
+    </div>
+
+    <div class="card">
+        <h3>Confirmá tu asistencia</h3>
+
+        <form action="https://formspree.io/f/mbdalyql" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="text" name="acompanantes" placeholder="¿Tienes alguna restricción alimentaria?">
+            <input type="text" name="acompanantes" placeholder="¿Alguna canción que no pueda faltar en la fiesta?">
+            <button type="submit">Confirmar asistencia</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        ¡Te esperamos para una noche inolvidable! ✨
+    </div>
+</div>
+
+</body>
+</html>
