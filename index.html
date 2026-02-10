@@ -556,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function startAuto() {
     interval = setInterval(function() {
       showSlide(index + 1);
-    }, 4000);
+    }, 3000);
   }
 
   function stopAuto() {
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", function() {
     restartAuto();
   });
 
-  startAuto();
+  
 
   function copiarAlias() {
   const alias = document.getElementById("alias").innerText;
@@ -612,6 +612,9 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error("Error al copiar: ", err);
     });
    }
+
+	startAuto();
+	
 });
 </script>
 
