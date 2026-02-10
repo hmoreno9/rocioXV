@@ -332,16 +332,18 @@ function copiarAlias() {
 }
 </script>
 
-<script>
+<script><script>
 document.addEventListener("DOMContentLoaded", function() {
 
   const carousel = document.querySelector(".carousel");
   const slides = document.querySelector(".slides");
   const images = document.querySelectorAll(".slides img");
-  const dotsContainer = document.querySelector(".dot");
+  const dotsContainer = document.querySelector(".dots");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
 
-  if (!carousel || !slides || images.length === 0) {
-    console.log("Carrusel no encontrado");
+  if (!carousel || !slides || images.length === 0 || !dotsContainer) {
+    console.log("Carrusel no encontrado correctamente");
     return;
   }
 
@@ -357,6 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     dot.addEventListener("click", function() {
       showSlide(i);
+      restartAuto();
     });
 
     dotsContainer.appendChild(dot);
@@ -378,21 +381,36 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function startAuto() {
-    if (interval) clearInterval(interval);
     interval = setInterval(function() {
       showSlide(index + 1);
     }, 4000);
   }
 
   function stopAuto() {
-    if (interval) clearInterval(interval);
+    clearInterval(interval);
   }
+
+  function restartAuto() {
+    stopAuto();
+    startAuto();
+  }
+
+  // Botones
+  nextBtn.addEventListener("click", function() {
+    showSlide(index + 1);
+    restartAuto();
+  });
+
+  prevBtn.addEventListener("click", function() {
+    showSlide(index - 1);
+    restartAuto();
+  });
 
   // Mouse pause
   carousel.addEventListener("mouseenter", stopAuto);
   carousel.addEventListener("mouseleave", startAuto);
 
-  // Swipe
+  // Swipe móvil
   slides.addEventListener("touchstart", function(e) {
     startX = e.touches[0].clientX;
   });
@@ -401,10 +419,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let endX = e.changedTouches[0].clientX;
     if (startX - endX > 50) showSlide(index + 1);
     if (endX - startX > 50) showSlide(index - 1);
+    restartAuto();
   });
 
   startAuto();
-
 });
 </script>
 
@@ -501,83 +519,100 @@ Ver Ubicación
     <p class="mp-note">Alias de Mercado Pago</p>
 </div>
 </section>
-
 <script>
-// INTRO + MUSICA
-const intro=document.getElementById("intro");
-const music=document.getElementById("music");
-const hero=document.getElementById("hero");
-const flash=document.getElementById("flash");
+document.addEventListener("DOMContentLoaded", function() {
 
-intro.addEventListener("click",()=>{
-music.volume=0.4;
-music.play();
-flash.style.opacity=1;
-setTimeout(()=>{flash.style.opacity=0},300);
-intro.style.opacity=0;
-setTimeout(()=>{intro.style.display="none";hero.style.opacity=1},1500);
-animateName();
+  const carousel = document.querySelector(".carousel");
+  const slides = document.querySelector(".slides");
+  const images = document.querySelectorAll(".slides img");
+  const dotsContainer = document.querySelector(".dots");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  if (!carousel || !slides || images.length === 0 || !dotsContainer) {
+    console.log("Carrusel no encontrado correctamente");
+    return;
+  }
+
+  let index = 0;
+  let interval = null;
+  let startX = 0;
+
+  // Crear puntitos
+  images.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    if (i === 0) dot.classList.add("active");
+
+    dot.addEventListener("click", function() {
+      showSlide(i);
+      restartAuto();
+    });
+
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateDots() {
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach(d => d.classList.remove("active"));
+    dots[index].classList.add("active");
+  }
+
+  function showSlide(i) {
+    if (i >= images.length) index = 0;
+    else if (i < 0) index = images.length - 1;
+    else index = i;
+
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  }
+
+  function startAuto() {
+    interval = setInterval(function() {
+      showSlide(index + 1);
+    }, 4000);
+  }
+
+  function stopAuto() {
+    clearInterval(interval);
+  }
+
+  function restartAuto() {
+    stopAuto();
+    startAuto();
+  }
+
+  // Botones
+  nextBtn.addEventListener("click", function() {
+    showSlide(index + 1);
+    restartAuto();
+  });
+
+  prevBtn.addEventListener("click", function() {
+    showSlide(index - 1);
+    restartAuto();
+  });
+
+  // Mouse pause
+  carousel.addEventListener("mouseenter", stopAuto);
+  carousel.addEventListener("mouseleave", startAuto);
+
+  // Swipe móvil
+  slides.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+  });
+
+  slides.addEventListener("touchend", function(e) {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) showSlide(index + 1);
+    if (endX - startX > 50) showSlide(index - 1);
+    restartAuto();
+  });
+
+  startAuto();
 });
-
-// NOMBRE ANIMADO
-function animateName(){
-let text="ROCÍO";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("name").innerHTML+=text.charAt(i);
-i++;
-setTimeout(type,200);
-}
-}
-type();
-}
-
-// COUNTDOWN
-const eventDate=new Date("May 1, 2026 21:00:00").getTime();
-setInterval(()=>{
-let now=new Date().getTime();
-let distance=eventDate-now;
-let days=Math.floor(distance/(1000*60*60*24));
-let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-document.getElementById("countdown").innerHTML=days+" DÍAS • "+hours+" HS";
-},1000);
-
-// PARTICULAS
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-for(let i=0;i<120;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,d:Math.random()*1});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="#d4af37";
-ctx.beginPath();
-for(let p of particles){
-ctx.moveTo(p.x,p.y);
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-}
-ctx.fill();
-update();
-}
-
-function update(){
-for(let p of particles){
-p.y+=p.d;
-if(p.y>canvas.height){
-p.y=0;
-p.x=Math.random()*canvas.width;
-}
-}
-}
-
-setInterval(draw,33);
 </script>
+
 
 </body>
 </html>
